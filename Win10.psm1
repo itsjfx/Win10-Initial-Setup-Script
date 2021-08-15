@@ -3,7 +3,36 @@
 # Author: Disassembler <disassembler@dasm.cz>
 # Version: v3.10, 2020-07-15
 # Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
+#
+# Modified version
+# Source: https://github.com/itsjfx/Win10-Initial-Setup-Script
 ##########
+
+##########
+#region jfx: Custom Tweaks
+##########
+
+Function DisableOfflineFiles {
+	Write-Output "Disabling Offline Files..."
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache" -Name "Enabled" -Type DWord -Value 0
+}
+
+Function EnableOfflineFiles {
+	Write-Output "Disabling Offline Files..."
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetCache" -Name "Enabled" -Type DWord -Value 1
+}
+
+##########
+#endregion jfx: Custom Tweaks
+##########
+
+
 
 ##########
 #region Privacy Tweaks
